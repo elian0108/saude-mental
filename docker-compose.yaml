@@ -16,3 +16,5 @@ services:
     image: postgres:13
     volumes:
        - ./postgres_data:/var/lib/postgresql/data:rw  # Persistent data volume for PostgreSQL
+    environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
