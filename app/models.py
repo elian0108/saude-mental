@@ -18,25 +18,24 @@ class Patient(models.Model):
     verbose_name = "Paciente"
     verbose_name_plural = "Pacientes"
 
-class MedicalRecord(models.Model):
+class Question(models.Model):
   id = models.AutoField(primary_key=True)
-  Do_you_accept_contact = models.IntegerField(null=False)
-  patient_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
-  form_id = models.CharField(max_length=255, null=True, blank=True)
-  last_test_date = models.DateTimeField(default=timezone.now)
+  question = models.CharField(max_length=255, null=False)
+  value = models.IntegerField(null=False)
 
   def __str__(self):
-        return self.name
+        return self.question
 
   class Meta:
-    verbose_name = "Porntuario"
-    verbose_name_plural = "Porntuarios"
- 
+    verbose_name = "Pergunta"
+    verbose_name_plural = "Perguntas"
+
 class Form(models.Model):
   id = models.AutoField(primary_key=True)
   name = models.CharField(max_length=255, null=False)
   diagnostic = models.CharField(max_length=255, null=False)
   result = models.IntegerField(null=False)
+  questions = models.ManyToManyField(Question, verbose_name='Pergunta')
 
   def __str__(self):
         return self.name
@@ -45,16 +44,16 @@ class Form(models.Model):
     verbose_name = "Formulario"
     verbose_name_plural = "Formularios"
 
-class Question(models.Model):
+class MedicalRecord(models.Model):
   id = models.AutoField(primary_key=True)
-  form_id = models.ForeignKey(Form, on_delete=models.CASCADE) 
-  question = models.CharField(max_length=255, null=False)
-  value = models.IntegerField(null=False)
+  Do_you_accept_contact = models.IntegerField(null=False)
+  patient_id = models.ForeignKey(Patient, on_delete=models.CASCADE)
+  forms = models.ManyToManyField(Form, verbose_name='Formularios')
+  last_test_date = models.DateTimeField(default=timezone.now)
 
   def __str__(self):
         return self.name
 
   class Meta:
-    verbose_name = "Pergunta"
-    verbose_name_plural = "Perguntas"
-    unique_together = (('form_id', 'id'),)  # Define composite primary key
+    verbose_name = "Porntuario"
+    verbose_name_plural = "Porntuarios"
