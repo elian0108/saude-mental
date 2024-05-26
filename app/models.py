@@ -57,3 +57,6 @@ class MedicalRecord(models.Model):
   class Meta:
     verbose_name = "Porntuario"
     verbose_name_plural = "Porntuarios"
+
+
+#

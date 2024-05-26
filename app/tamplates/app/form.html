@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Minha Página</title>
+</head>
+<body>
+    <header>
+        <button onclick="location.href='/'">Home</button>
+    </header>
+
+    <form method="post">
+        {% csrf_token %}
+        <!-- Aqui você pode renderizar os campos do formulário -->
+        {% for pergunta in perguntas %}
+            <input type="checkbox" name="pergunta" value="{{ pergunta.id }}">
+            <label for="{{ pergunta.id }}">{{ pergunta.question }}</label><br>
+        {% endfor %}
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

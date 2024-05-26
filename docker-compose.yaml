@@ -1,4 +1,4 @@
-version: '3'
+version: '3.3'
 
 services:
 
@@ -8,13 +8,13 @@ services:
        - .:/home/python/app
      ports:
       - 8000:8000
-     depends_on:
-      - db  # Django depends on the PostgreSQL database to be ready
+    # depends_on:
+    #  - db  # Django depends on the PostgreSQL database to be ready
 
-  # PostgreSQL database container
+
   db:
     image: postgres:13
     volumes:
        - ./postgres_data:/var/lib/postgresql/data:rw  # Persistent data volume for PostgreSQL
     environment:
-      - "POSTGRES_HOST_AUTH_METHOD=trust"
+    - "POSTGRES_HOST_AUTH_METHOD=trust"   

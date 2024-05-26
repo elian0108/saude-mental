@@ -73,20 +73,19 @@ WSGI_APPLICATION = 'saude_mental.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+#
+
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        "HOST": "db",  # set in docker-compose.yml
-        "PORT": 5432,  # default postgres port
-        'NAME': "SMdb",
+        "PORT": '5432', 
+        'NAME': 'postgres',
         'USER': 'postgres',
-        'PASSWORD': '123465'
-        #'ENGINE': 'django.db.backends.postgresql',
-        #'NAME': BASE_DIR / 'db.postgresql',
+        'PASSWORD': 'postgres',
+        "HOST": 'localhost'
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
